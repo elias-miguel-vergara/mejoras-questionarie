@@ -1,0 +1,41 @@
+.button {
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+  height: 32px;
+  text-transform: uppercase;
+}
+
+.button:disabled {
+  opacity: 0.8;
+}
+
+.primary {
+  background-color: theme('colors.primary');
+  border: 1px solid theme('colors.primary');
+  color: white;
+  box-shadow: inset 1px 2px 10px black;
+}
+
+.primary > * {
+  color: white;
+}
+
+.secondary {
+  background-color: theme('colors.secondary');
+  color: black;
+  box-shadow: 1px 1px 4px black;
+}
+
+.secondary > * {
+  color: black;
+}
+
+.expand {
+  transform: scale(1);
+  transition: transform 0.4s;
+}
+
+.expand:hover {
+  transform: scale(1.1);
+}
