@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { getAllTopics } from '../topics'
+import topics from '../context/topics/topics.json'
+import { getAllTopics } from '../context/topics'
 import { TopicsProvider } from '../components'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,25 +24,7 @@ export default function RootLayout({
         <TopicsProvider
           topics={[
             ...getAllTopics(),
-            {
-              id: 'frontend',
-              description: 'Web design, front facing applications, styling.',
-              children: [
-                'css',
-                'html',
-                'javascript',
-                'package-managers',
-                'pick-a-framework',
-                'vcs-hosting',
-                'version-control-system',
-              ],
-            },
-            {
-              id: 'fullstack',
-              description:
-                'Web design, front facing applications, styling, as well as database management, server maintenance, processes.',
-              children: ['javascript', 'react'],
-            },
+            ...topics,
           ]}
         >
           <div className="flex bg-black text-white items-center justify-start h-[60px] pl-[5px]">

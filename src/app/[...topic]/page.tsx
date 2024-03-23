@@ -1,4 +1,4 @@
-import { getAllPossibleRoutes } from '@/topics'
+import { getAllPossibleRoutes } from '@/context/topics'
 import Main from './main'
 
 export default function Home({ params }: { params: { topic: string[] } }) {

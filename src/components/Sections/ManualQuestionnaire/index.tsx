@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import {
   Button,
   TopicsContext,
@@ -5,7 +6,6 @@ import {
   QuestionnaireDescription,
 } from '@/components'
 import { capitalize } from '@/utils'
-import { useContext, useState } from 'react'
 
 export const ManualQuestionnaire = () => {
   const { currentTopic, selectTopic, switchManualQuestionnaire } =

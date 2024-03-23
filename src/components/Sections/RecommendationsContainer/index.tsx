@@ -24,7 +24,7 @@ export const RecommendationsContainer = () => {
 
       {!!currentTopic?.children?.length ? (
         <>
-          <h3 className="font-bold mt-6">Recommendations:</h3>
+          <div className="font-bold mt-6">Recommendations:</div>
           {currentTopic.children.map((child) => (
             <Button
               key={child}

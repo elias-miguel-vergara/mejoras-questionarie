@@ -8,28 +8,18 @@ import {
 import { ManualQuestionnaire } from '@/components/Sections/ManualQuestionnaire'
 
 export default function Main({ params }: { params: { topic: string[] } }) {
-  const { currentTopic, selectTopic, manualQuestionnaire } =
-    useContext(TopicsContext)
-
+  const { currentTopic, selectTopic, manualQuestionnaire } = useContext(TopicsContext)
   const { startedQuestionnaire = false } = currentTopic!
+  const topics = [...params.topic]
+  const topicsid = topics.pop();
 
   useEffect(() => {
-    const topics = [...params.topic]
     selectTopic!({
-      id: topics.pop()!,
+      id: topicsid!,
       current: currentTopic!,
       previousParents: topics,
     })
-  }, [params])
-
-  useEffect(() => {
-    const topics = [...params.topic]
-    selectTopic!({
-      id: topics.pop()!,
-      current: currentTopic!,
-      previousParents: topics,
-    })
-  }, [manualQuestionnaire])
+  }, [manualQuestionnaire, params])
   return (
     <div className="main-container">
       {manualQuestionnaire ? (
