@@ -54,7 +54,10 @@ export const ManualQuestionnaire = () => {
   return (
     <div className="flex w-full flex-col">
       {loading ? ( 
-        <div>Loading...</div>
+        <div className='flex justify-center items-center h-dvh relative'>
+          <div className='animate-spin border-4 border-solid border-gray-900 border-t-transparent rounded-full w-40 h-40 static'></div>
+          <div className='h-full flex justify-center items-center font-bold absolute'>Loading...</div>
+        </div>
       ) : (
         <>
           {!fileUploaded && (
