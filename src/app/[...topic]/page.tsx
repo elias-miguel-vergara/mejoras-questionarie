@@ -1,4 +1,4 @@
-import { getAllPossibleRoutes } from '@/context/topics'
+import { getAllTopics } from '@/context/topics/getalltopics'
 import Main from './main'
 
 export default function Home({ params }: { params: { topic: string[] } }) {
@@ -10,5 +10,5 @@ export default function Home({ params }: { params: { topic: string[] } }) {
 }
 
 export async function generateStaticParams() {
-  return getAllPossibleRoutes()
+  return getAllTopics()
 }

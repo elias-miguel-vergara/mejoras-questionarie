@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import {
   Button,
   TopicsContext,
@@ -10,9 +10,13 @@ import { capitalize } from '@/utils'
 export const ManualQuestionnaire = () => {
   const { currentTopic, selectTopic, switchManualQuestionnaire } =
     useContext(TopicsContext)
+
   const [fileUploaded, setFileUploaded] = useState(false)
 
+  const [loading, setLoading] = useState(false)
+
   const handleFileChange = (e: any) => {
+    setLoading(true);
     if (e.target.files.length) {
       const reader = new FileReader()
 
@@ -37,35 +41,64 @@ export const ManualQuestionnaire = () => {
     }
   }
 
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+  
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+
   return (
     <div className="flex w-full flex-col">
-      <div className="flex justify-end p-4">
-        <Button
-          type="secondary"
-          classes="max-w-[150px]"
-          onClick={() => {
-            switchManualQuestionnaire!()
-          }}
-        >
-          Return
-        </Button>
-      </div>
-      {fileUploaded ? (
-        <div className="flex w-full p-[20px] flex-col">
-          <h1 className="text-2xl font-bold">{capitalize(currentTopic!.id)}</h1>
-          {currentTopic?.startedQuestionnaire ? (
-            <QuestionsContainer />
-          ) : (
-            <QuestionnaireDescription />
-          )}
-        </div>
+      {loading ? ( 
+        <div>Loading...</div>
       ) : (
-        <div className="flex p-6 flex-col items-center">
-          <p className="text-2xl font-bold">
-            Please upload a JSON file to start questionnaire
-          </p>
-          <input onChange={handleFileChange} className="mt-6" type="file" />
-        </div>
+        <>
+          {!fileUploaded && (
+            <div className='flex justify-end p-4'>
+              <Button
+                type="secondary"
+                classes="max-w-[150px]"
+                onClick={() => {
+                  switchManualQuestionnaire!();
+                }}
+              >
+                Return
+              </Button>
+            </div>
+          )}
+          {fileUploaded ? (
+            <div className="flex w-full p-[20px] flex-col">
+              <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold">{capitalize(currentTopic!.id)}</h1>
+                <Button
+                  type="secondary"
+                  classes="max-w-[150px] font-bold"
+                  onClick={() => {
+                    switchManualQuestionnaire!();
+                  }}
+                >
+                  Return
+                </Button>
+              </div>
+              {currentTopic?.startedQuestionnaire ? (
+                <QuestionsContainer />
+              ) : (
+                <QuestionnaireDescription />
+              )}
+            </div>
+          ) : (
+            <div className="flex p-6 flex-col items-center">
+              <p className="text-2xl font-bold">
+                Please upload a JSON file to start questionnaire
+              </p>
+              <input onChange={handleFileChange} className="mt-6" type="file" />
+            </div>
+          )}
+        </>
       )}
     </div>
   )

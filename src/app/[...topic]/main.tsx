@@ -2,7 +2,6 @@
 import { useContext, useEffect } from 'react'
 import {
   QuestionnaireContainer,
-  RecommendationsContainer,
   TopicsContext,
 } from '../../components'
 import { ManualQuestionnaire } from '@/components/Sections/ManualQuestionnaire'
@@ -32,9 +31,6 @@ export default function Main({ params }: { params: { topic: string[] } }) {
             }`}
           >
             <QuestionnaireContainer />
-          </div>
-          <div className={`main-right ${startedQuestionnaire ? 'hidden' : ''}`}>
-            <RecommendationsContainer />
           </div>
         </>
       )}
