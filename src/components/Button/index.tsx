@@ -8,21 +8,20 @@ interface ButtonProps {
   disabled?: boolean
 }
 
-export const Button = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   type,
   onClick,
   classes = '',
   expandEffect,
   disabled,
-}: ButtonProps) => {
+}) => {
+  const buttonClasses = `button ${type} font-bold ${classes} ${expandEffect ? 'expand' : ''}`
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`button ${type} font-bold ${classes} ${
-        expandEffect ? 'expand' : ''
-      }`}
+      className={buttonClasses}
     >
       {children}
     </button>
