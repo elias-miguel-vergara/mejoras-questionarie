@@ -2,12 +2,12 @@ export const ResourcesContainer = ({
   resources,
   title,
 }: {
-  resources?: { name: string; link: string }[]
-  title?: string
+  resources?: { name: string; link: string }[];
+  title?: string;
 }) => {
   return (
-    <div className="flex mt-2 flex-col ">
-      {title && <p className="mt-4 text-lg font-bold ">{title}</p>}
+    <div className="flex mt-2 flex-col">
+      {title && <p className="mt-4 text-lg font-bold">{title}</p>}
       <div className="flex pl-8 mt-2">
         {!!resources?.length ? (
           <ul style={{ listStyleType: 'disc' }}>
@@ -15,7 +15,7 @@ export const ResourcesContainer = ({
               <li key={index}>
                 <a
                   target="_blank"
-                  className="hover:text-[purple]"
+                  className="hover:text-purple"
                   href={resource.link}
                 >
                   {resource.name}
@@ -24,9 +24,9 @@ export const ResourcesContainer = ({
             ))}
           </ul>
         ) : (
-          <>No Resources Found</>
+          <p>No Resources Found</p>
         )}
       </div>
     </div>
-  )
-}
+  );
+};

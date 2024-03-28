@@ -42,7 +42,7 @@ type TopicState = Topic & { previousParents?: string[] }
 const initialTopic: Topic = {
   id: 'development',
   description: 'Select which area  you want to dive in.',
-  children: ['frontend', 'fullstack'],
+  children: [],
 }
 
 export function TopicsProvider({
