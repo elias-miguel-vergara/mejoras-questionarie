@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Button, TopicsContext } from '../..';
+import { NextRouter, useRouter } from 'next/router';
 
-const navigateBack = (router, pathname) => {
+const navigateBack = (router: NextRouter, pathname: string) => {
   const path = pathname.split('/');
   path.pop();
   router.push(path.join('/'));

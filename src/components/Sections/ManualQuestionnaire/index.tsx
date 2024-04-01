@@ -35,10 +35,11 @@ export const ManualQuestionnaire = () => {
     const processJson = (json: any) => {
       for (let topicName in json.skill) {
         if (json.skill[topicName].id) {
+          localStorage.setItem('currentTopic', JSON.stringify(json.skill[topicName]));
           selectTopic!({
             current: json.skill[topicName],
             isManualQuestionnaire: true,
-          })
+          });
           setFileUploaded(true)
           break
         }
@@ -55,6 +56,33 @@ export const ManualQuestionnaire = () => {
       return () => clearTimeout(timer);
     }
   }, [loading]);
+
+  useEffect(() => {
+    const storedTopic = localStorage.getItem('currentTopic');
+    if (storedTopic) {
+      selectTopic!({
+        current: JSON.parse(storedTopic),
+        isManualQuestionnaire: true,
+      });
+      setFileUploaded(true);
+    }
+
+    return () => {
+      localStorage.removeItem('currentTopic');
+    }
+  }, []);
+
+  const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+    localStorage.removeItem('currentTopic');
+  };
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
     const renderLoadingIndicator = () => (
       <div className='flex justify-center items-center h-dvh relative'>

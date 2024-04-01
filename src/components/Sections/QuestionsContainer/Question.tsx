@@ -36,7 +36,9 @@ export const Question = ({ question, saveAnswer }: QuestionProps) => {
 
   const handleConfirmClick = (option: Option, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
-    saveAnswer(question.data.id, option.label);
+    if (["A", "B", "C"].includes(option.label)) {
+      saveAnswer(question.data.id, option.label as 'A' | 'B' | 'C');
+    }
   };
 
   return (
